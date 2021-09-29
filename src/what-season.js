@@ -12,10 +12,14 @@ import { NotImplementedError } from '../extensions/index.js';
  * 
  */
 export default function getSeason(date) {
-  if(!date){
+  if(!date ){
     return 'Unable to determine the time of year!';
-  } else if(date.__proto__ !== 'Date') {
-    throw new NotImplementedError('Invalid date!');
+  }
+
+  let dateContainer = new Date(date);
+
+  if(!(Object.prototype.toString.call(date) === '[object Date]') && isNaN(dateContainer.getDate()) && date.getMonth.call) {
+     throw new Error('Invalid date!');
   }
 
   let month = date.getMonth(),
